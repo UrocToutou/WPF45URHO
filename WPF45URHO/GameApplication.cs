@@ -173,7 +173,8 @@ namespace WPF45URHO
 
             var graphics = Graphics;
             camera.OrthoSize = (float)graphics.Height * PixelSize;
-            camera.Zoom = (1.0f * Math.Min((float)graphics.Width / 1280.0f, (float)graphics.Height / 800.0f)); // Set zoom according to user's resolution to ensure full visibility (initial zoom (1.0) is set for full visibility at 1280x800 resolution)
+            // Set zoom according to user's resolution to ensure full visibility (initial zoom (1.0) is set for full visibility at 1280x800 resolution)
+            camera.Zoom = (1.0f * Math.Min((float)graphics.Width / 1280.0f, (float)graphics.Height / 800.0f)); 
 
             var cache = ResourceCache;
             // Get tmx file
@@ -299,6 +300,9 @@ namespace WPF45URHO
                     return;
                 case Key.F2:
                     debugHud.ToggleAll();
+                    return;
+                case Key.F3:
+                    MainWindow.thisOne.showToolWindow();
                     return;
             }
 

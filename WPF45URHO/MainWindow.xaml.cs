@@ -21,9 +21,12 @@ namespace WPF45URHO
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal static MainWindow thisOne;
+        internal ToolWindow toolWindow = null;
         public MainWindow()
         {
             InitializeComponent();
+            thisOne = this;
             Loaded += MainWindow_Loaded;
         }
 
@@ -37,6 +40,22 @@ namespace WPF45URHO
             //var app = await UrhoSurfaceCtrl.Show(typeof(GameApplication), new ApplicationOptions(assetsFolder: "Data"));
             var app = await UrhoSurfaceCtrl.Show(typeof(GameApplication), new ApplicationOptions());
             Urho.Application.InvokeOnMain(() => { /*app.DoSomeStuff();*/});
+        }
+
+        internal void showToolWindow()
+        {
+            if (toolWindow == null)
+            {
+                toolWindow = new ToolWindow();
+                toolWindow.Closed += ToolWindow_Closed;
+                toolWindow.Owner = this;
+                toolWindow.Show();
+            }
+        }
+
+        private void ToolWindow_Closed(object sender, EventArgs e)
+        {
+            toolWindow = null;
         }
     }
 }
