@@ -302,7 +302,15 @@ namespace WPF45URHO
                     debugHud.ToggleAll();
                     return;
                 case Key.F3:
-                    MainWindow.thisOne.showToolWindow();
+                    {
+                        var ep = new List<ObjectProperty>()
+                        {
+                            new ObjectProperty(Renderer, "TextureQuality", flags:PropertyFlags.UpDownSpinner, min:0, max:2),
+                            new ObjectProperty(Renderer, "MaterialQuality", flags:PropertyFlags.UpDownSpinner, min:0, max:2),
+                            new ObjectProperty(Renderer, "DrawShadows"),
+                        };
+                        MainWindow.thisOne.showToolWindow(ep);
+                    }
                     return;
             }
 

@@ -22,7 +22,7 @@ namespace WPF45URHO
     public partial class MainWindow : Window
     {
         internal static MainWindow thisOne;
-        internal ToolWindow toolWindow = null;
+        internal Window toolWindow = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -42,15 +42,20 @@ namespace WPF45URHO
             Urho.Application.InvokeOnMain(() => { /*app.DoSomeStuff();*/});
         }
 
-        internal void showToolWindow()
+        internal void showToolWindow(List<ObjectProperty> list)
         {
             if (toolWindow == null)
             {
-                toolWindow = new ToolWindow();
+                //toolWindow = new ToolWindow();
+                toolWindow = new SettingsWindow();
                 toolWindow.Closed += ToolWindow_Closed;
                 toolWindow.Owner = this;
                 toolWindow.Show();
             }
+            /*if (toolWindow is ToolWindow)
+                (toolWindow as ToolWindow).set(list);
+            else*/
+                (toolWindow as SettingsWindow).set(list);
         }
 
         private void ToolWindow_Closed(object sender, EventArgs e)
